@@ -16,9 +16,8 @@ int main(int argc, char *argv[]) {
     char funcao[MAX];
     double epsilon;
 
-    while (!feof(stdin)) {
-        /* Lendo dimensão */
-        scanf("%d", &dimensao);
+    /* Lê dimensão testando se entrada acabou */
+    while (scanf("%d", &dimensao) != EOF) {
 
         /* Declarando e lendo vetor de funções */
         void **f = vetorFuncoes(dimensao, funcao);
@@ -32,11 +31,16 @@ int main(int argc, char *argv[]) {
         /* Lendo número máximo de iterações */
         scanf("%d", &maxIt);
 
+        /* Obtendo variáveis do sistema */
+        int tamVariaveis;
+        char ** variaveis = vetorVariaveis(dimensao, f, &tamVariaveis);
+
         /* Resolver por método de Newton */
 
         /* Liberando memória */
         free(f);
         free(aprox);
+        free(variaveis);
     }
     
     fclose(arqout);
