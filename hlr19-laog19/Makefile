@@ -3,7 +3,7 @@
 
 CFLAGS = -Wall -lm -lmatheval
 
-objects = vetores.o linhaComando.o utils.o
+objects = vetores.o linhaComando.o utils.o newton.o gauss.o
 
 all: newtonSNL
 
@@ -15,6 +15,12 @@ vetores.o: vetores.c vetores.h
 
 linhaComando.o: linhaComando.c linhaComando.h
 	gcc -c linhaComando.c
+
+newton.o: newton.c newton.h gauss.o
+	gcc -c newton.c gauss.o
+
+gauss.o: gauss.c gauss.h
+	gcc -c gauss.c
 
 utils.o: utils.c utils.h
 	gcc -c utils.c
