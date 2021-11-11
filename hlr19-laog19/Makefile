@@ -21,7 +21,8 @@ utils.o: utils.c utils.h
 debug: CFLAGS += -g 
 debug: all
 
-purge: clean
-	-rm -f newtonSNL
 clean:
-	-rm -f $(objects)
+	-rm -f $(objects) newtonSNL
+
+zip: clean
+	tar -czvf ../hlr19-laog19.tgz *
