@@ -1,3 +1,6 @@
+/* Henrique Luiz Rieger - GRR20190357 - hlr19 */
+/* Leon Augusto Okida Gonçalves - GRR20190365 - laog19 */
+
 #include "linhaComando.h"
 
 FILE * abreArquivo(int argc, char *argv[]) {

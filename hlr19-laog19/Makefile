@@ -1,4 +1,5 @@
-#Henrique e Leon
+# Henrique Luiz Rieger - GRR20190357 - hlr19
+# Leon Augusto Okida Gonçalves - GRR20190365 - laog19
 
 CFLAGS = -Wall -lm -lmatheval
 
