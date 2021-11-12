@@ -107,6 +107,7 @@ enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, 
         }
     }
 
+    printResultados(arqout, x, n, variaveis);
     limpaVetores(delta, f_eval, jac_eval);
 
     /* Retorna limite de iterações atingido */
