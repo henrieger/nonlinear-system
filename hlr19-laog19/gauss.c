@@ -6,8 +6,7 @@
 #include <math.h>
 
 /* Encontra índice em a com maior valor na coluna j */
-int encontraMax(int n, double **a, int j)
-{
+int encontraMax(int n, double **a, int j) {
     int max = j;
     for (int i = j+1; i < n; i++)
         max = (fabs(a[i][j]) > fabs(a[i][max])) ? i : max;
@@ -16,8 +15,7 @@ int encontraMax(int n, double **a, int j)
 }
 
 /* Troca linhas l1 e l2 de lugar em a e b */
-void trocaLinhas(double **a, double *b, int l1, int l2)
-{
+void trocaLinhas(double **a, double *b, int l1, int l2) {
     double *auxA = a[l1];
     double auxB = b[l1];
 
@@ -29,29 +27,23 @@ void trocaLinhas(double **a, double *b, int l1, int l2)
 }
 
 /* Calcula a retrossubstituição do sistema linear já transformado */
-void retrossubstituicao(int n, double **a, double *b, double *x)
-{
+void retrossubstituicao(int n, double **a, double *b, double *x) {
     x[n-1] = b[n-1] / a[n-1][n-1];
-    for (int i = n-2; i >= 0; i--)
-    {
+    for (int i = n-2; i >= 0; i--) {
         double m = a[i][i];
         x[i] = b[i] / m;
         for (int j = n-1; j > i; j--)
             x[i] -= a[i][j] * x[j] / m;
     }
-    
 }
 
-enum t_sistemas gauss(int n, double **a, double *b, double *x)
-{
-    for (int i = 0; i < n; i++)
-    {
+enum t_sistemas gauss(int n, double **a, double *b, double *x) {
+    for (int i = 0; i < n; i++) {
         int iPivo = encontraMax(n, a, i);
         if (iPivo != i)
             trocaLinhas(a, b, i, iPivo);
 
-        for(int k = i+1; k < n; k++)
-        {
+        for (int k = i+1; k < n; k++) {
             double m = a[k][i] / a[i][i];
             a[k][i] = 0;
             
@@ -62,9 +54,8 @@ enum t_sistemas gauss(int n, double **a, double *b, double *x)
         }  
     }
 
-    if(a[n-1][n-1] == 0)
-    {
-        if(b[n-1] == 0)
+    if (a[n-1][n-1] == 0) {
+        if (b[n-1] == 0)
             return SPI;
         return SI;
     }

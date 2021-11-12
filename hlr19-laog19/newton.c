@@ -10,27 +10,23 @@
 #include <stdlib.h>
 
 /* Devolve a norma do vetor a, de tamanho n */
-double norma(double *a, int n)
-{
+double norma(double *a, int n) {
     double max = fabs(a[0]); 
-    for (int i = 1; i < n; i++)
-    {
+    for (int i = 1; i < n; i++) {
         double valor = fabs(a[i]);
         max = (max > valor) ? max : valor;
     }
     return max;
 }
 
-void limpaVetores(double *delta, double *f_eval, double **jac_eval)
-{
+void limpaVetores(double *delta, double *f_eval, double **jac_eval) {
     free(delta);
     free(f_eval);
     free(jac_eval[0]);
     free(jac_eval);
 }
 
-enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, int maxIt, char **variaveis, FILE *arqout)
-{
+enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, int maxIt, char **variaveis, FILE *arqout) {
     /* Declaração de vetores auxiliares */
     double *delta = (double *)malloc(n * sizeof(double)); /* Vetor delta */
     double *f_eval = (double *)malloc(n * sizeof(double)); /* F(X) */
@@ -42,8 +38,7 @@ enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, 
         jac_eval[i+1] = jac_eval[i]+n;
     
     /* Iterações do método de Newton */
-    for (int k = 0; k < maxIt; k++)
-    {
+    for (int k = 0; k < maxIt; k++) {
         /* Imprime os resultados atuais do sistema na saida definida */
         printResultados(arqout, x, n, variaveis);
 
@@ -52,14 +47,12 @@ enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, 
             f_eval[i] = evaluator_evaluate(f[i], n, variaveis, x);
 
         /* Checa condição de parada 1 */
-        if(norma(f_eval, n) < epsilon)
-        {
+        if (norma(f_eval, n) < epsilon) {
             limpaVetores(delta, f_eval, jac_eval);
             return SPD;
         }
         
-        for (int i = 0; i < n; i++)
-        {
+        for (int i = 0; i < n; i++) {
             /* Inverte valores de F(X) para cálculo do delta*/
             f_eval[i] = -f_eval[i];
             
@@ -70,8 +63,7 @@ enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, 
 
         /* Calcula o sistema linear pelo método de Gauss */
         int sisLinear = gauss(n, jac_eval, f_eval, delta);
-        if(sisLinear != SPD)
-        {
+        if (sisLinear != SPD) {
             limpaVetores(delta, f_eval, jac_eval);
             return sisLinear;
         }
@@ -81,8 +73,7 @@ enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, 
             x[i] = x[i] + delta[i];
 
         /* Checa condição de parada 2 */
-        if(norma(delta, n) < epsilon)
-        {
+        if (norma(delta, n) < epsilon) {
             printResultados(arqout, x, n, variaveis);
             limpaVetores(delta, f_eval, jac_eval);
             return SPD;

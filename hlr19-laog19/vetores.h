@@ -18,4 +18,5 @@ char ** vetorVariaveis(int n, void ** f, int * tamVariaveis);
 
 /* Declara, aloca e preenche a matriz jacobiana */
 void *** jacobiana(void **f, int n, char **variaveis);
+
 #endif
