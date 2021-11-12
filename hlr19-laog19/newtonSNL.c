@@ -44,11 +44,8 @@ int main(int argc, char *argv[]) {
         /* Criando matriz de derivadas parciais (jacobiana) */
         void ***j = jacobiana(f, dimensao, variaveis);
 
-        /* Vetor de resultados com aproximações iniciais em 0 */
-        double *x = (double *)calloc(dimensao, sizeof(double));
-
         /* Resolver por método de Newton */
-        enum t_sistemas newtonRes = newton(f, j, dimensao, x, epsilon, maxIt, variaveis, arqout);
+        enum t_sistemas newtonRes = newton(f, j, dimensao, aprox, epsilon, maxIt, variaveis, arqout);
 
         /* Checando tipo de sistema */
         switch (newtonRes)
@@ -78,7 +75,6 @@ int main(int argc, char *argv[]) {
         free(variaveis);
         free(j[0]);
         free(j);
-        free(x);
     }
     
     fclose(arqout);
