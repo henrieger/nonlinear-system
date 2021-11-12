@@ -4,7 +4,12 @@
 #ifndef __GAUSS__
 #define __GAUSS__
 
-enum t_sistemas {SPD, SPI, SI, MAX_IT};
+enum t_sistemas {
+    SPD, /* Sistema Possível e Determinado */
+    SPI, /* Sistema Possível e Indeterminado */
+    SI, /* Sistema Impossível */
+    MAX_IT /* Limite de iterações no cálculo atingido */
+};
 
 /* Calcula o sistema linear pelo método de Gauss com pivoteamento parcial */
 enum t_sistemas gauss(int n, double **a, double *b, double *x);
