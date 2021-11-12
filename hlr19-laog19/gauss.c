@@ -31,18 +31,18 @@ void trocaLinhas(double **a, double *b, int l1, int l2)
 /* Calcula a retrossubstituição do sistema linear já transformado */
 void retrossubstituicao(int n, double **a, double *b, double *x)
 {
-    x[n-1] = b[n-1];
+    x[n-1] = b[n-1] / a[n-1][n-1];
     for (int i = n-2; i >= 0; i--)
     {
-        x[i] = b[i];
+        double m = a[i][i];
+        x[i] = b[i] / m;
         for (int j = n-1; j > i; j--)
-            x[i] -= a[i][j] * x[j];
-        
+            x[i] -= a[i][j] * x[j] / m;
     }
     
 }
 
-void gauss(int n, double **a, double *b, double *x)
+enum t_sistemas gauss(int n, double **a, double *b, double *x)
 {
     for (int i = 0; i < n; i++)
     {
@@ -62,5 +62,13 @@ void gauss(int n, double **a, double *b, double *x)
         }  
     }
 
+    if(a[n-1][n-1] == 0)
+    {
+        if(b[n-1] == 0)
+            return SPI;
+        return SI;
+    }
+
     retrossubstituicao(n, a, b, x);
+    return SPD;
 }
