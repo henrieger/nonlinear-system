@@ -3,6 +3,8 @@
 
 #include "linhaComando.h"
 #include "vetores.h"
+#include "gauss.h"
+#include "newton.h"
 
 #include <math.h>
 #include <matheval.h>
@@ -37,12 +39,42 @@ int main(int argc, char *argv[]) {
         int tamVariaveis;
         char ** variaveis = vetorVariaveis(dimensao, f, &tamVariaveis);
 
+        /* Criando matriz de derivadas parciais (jacobiana) */
+        void ***j = jacobiana(f, dimensao, variaveis);
+
+        /* Vetor de resultados com aproximações iniciais em 0 */
+        double *x = (double *)calloc(dimensao, sizeof(double));
+
         /* Resolver por método de Newton */
+        enum t_sistemas newtonRes = newton(f, j, dimensao, x, epsilon, maxIt, variaveis);
+
+        /* Checando tipo de sistema */
+        switch (newtonRes)
+        {
+        case SPD:
+        case MAX_IT:
+            // TODO: print resultados
+            break;
+
+        case SPI:
+            fprintf(stderr, "Sistema Possível e Indeterminado");
+            break;
+
+        case SI:
+            fprintf(stderr, "Sistema Impossível");
+            break;
+
+        default:
+            break;
+        }
 
         /* Liberando memória */
         free(f);
         free(aprox);
         free(variaveis);
+        free(j[0]);
+        free(j);
+        free(x);
     }
     
     fclose(arqout);
