@@ -11,6 +11,6 @@
 void *** jacobiana(void **f, int n, char **variaveis);
 
 /* Calcula o sistema não-linear pelo método de Newton */
-enum t_sistemas newton(void **f, void ***j, int n, double *x, double epsilon, int max_it, char **variaveis, FILE *arqout);
+enum t_sistemas newton(void **f, void ***j, int n, double *x, double epsilon, int maxIt, char **variaveis, FILE *arqout);
 
 #endif

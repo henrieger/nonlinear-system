@@ -47,7 +47,7 @@ void limpaVetores(double *delta, double *f_eval, double **jac_eval)
     free(jac_eval);
 }
 
-enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, int max_it, char **variaveis, FILE *arqout)
+enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, int maxIt, char **variaveis, FILE *arqout)
 {
     /* Declaração de vetores auxiliares */
     double *delta = (double *)malloc(n * sizeof(double)); /* Vetor delta */
@@ -60,7 +60,7 @@ enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, 
         jac_eval[i+1] = jac_eval[i]+n;
     
     /* Iterações do método de Newton */
-    for (int k = 0; k < max_it; k++)
+    for (int k = 0; k < maxIt; k++)
     {
         /* Imprime os resultados atuais do sistema na saida definida */
         printResultados(arqout, x, n, variaveis);
