@@ -21,24 +21,6 @@ double norma(double *a, int n)
     return max;
 }
 
-void *** jacobiana(void **f, int n, char **variaveis)
-{
-    void *** jac = (void ***)malloc(n * sizeof(void **));
-    jac[0] = (void **)malloc(n * n * sizeof(void *));
-
-    for (int i = 0; i < n-1; i++)
-        jac[i+1] = jac[i]+n;
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-            jac[i][j] = evaluator_derivative(f[i], variaveis[j]);
-    }
-    
-
-    return jac;
-}
-
 void limpaVetores(double *delta, double *f_eval, double **jac_eval)
 {
     free(delta);
