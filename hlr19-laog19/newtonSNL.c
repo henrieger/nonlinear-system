@@ -48,24 +48,22 @@ int main(int argc, char *argv[]) {
         enum t_sistemas newtonRes = newton(f, j, dimensao, aprox, epsilon, maxIt, variaveis, arqout);
 
         /* Checando tipo de sistema */
-        switch (newtonRes)
-        {
+        switch (newtonRes) {
         case SPD:
-        case MAX_IT:
             // TODO: print resultados
             break;
-
+        case MAX_IT:
+            // TODO: print resultados
+            printSistema(stderr, f, dimensao);
+            fprintf(stderr, "Limite de Iterações atingido\n\n");
+            break;
         case SPI:
             printSistema(stderr, f, dimensao);
             fprintf(stderr, "Sistema Possível e Indeterminado\n\n");
             break;
-
         case SI:
             printSistema(stderr, f, dimensao);
             fprintf(stderr, "Sistema Impossível\n\n");
-            break;
-
-        default:
             break;
         }
 
