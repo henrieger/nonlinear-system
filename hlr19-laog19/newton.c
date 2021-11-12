@@ -39,6 +39,14 @@ void *** jacobiana(void **f, int n, char **variaveis)
     return jac;
 }
 
+void limpaVetores(double *delta, double *f_eval, double **jac_eval)
+{
+    free(delta);
+    free(f_eval);
+    free(jac_eval[0]);
+    free(jac_eval);
+}
+
 enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, int max_it, char **variaveis, FILE *arqout)
 {
     /* Declaração de vetores auxiliares */
@@ -54,6 +62,9 @@ enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, 
     /* Iterações do método de Newton */
     for (int k = 0; k < max_it; k++)
     {
+        /* Imprime os resultados atuais do sistema na saida definida */
+        printResultados(arqout, x, n, variaveis);
+
         /* Calcula os resultados do sistema encontrados até o momento */
         for (int i = 0; i < n; i++)
             f_eval[i] = evaluator_evaluate(f[i], n, variaveis, x);
@@ -61,11 +72,7 @@ enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, 
         /* Checa condição de parada 1 */
         if(norma(f_eval, n) < epsilon)
         {
-            free(delta);
-            free(f_eval);
-            free(jac_eval[0]);
-            free(jac_eval);
-
+            limpaVetores(delta, f_eval, jac_eval);
             return SPD;
         }
         
@@ -83,39 +90,26 @@ enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, 
         int sisLinear = gauss(n, jac_eval, f_eval, delta);
         if(sisLinear != SPD)
         {
-            free(delta);
-            free(f_eval);
-            free(jac_eval[0]);
-            free(jac_eval);
-
+            limpaVetores(delta, f_eval, jac_eval);
             return sisLinear;
         }
 
         /* Adiciona os deltas à resolução do sistema */
         for (int i = 0; i < n; i++)
             x[i] = x[i] + delta[i];
-            
-        /* Imprime os resultados atuais do sistema na saida definida */
-        printResultados(arqout, x, n, variaveis);
 
         /* Checa condição de parada 2 */
         if(norma(delta, n) < epsilon)
         {
-            free(delta);
-            free(f_eval);
-            free(jac_eval[0]);
-            free(jac_eval);
-
+            printResultados(arqout, x, n, variaveis);
+            limpaVetores(delta, f_eval, jac_eval);
             return SPD;
         }
     }
-    
-    /* Retorna limite de iterações atingido */
-    free(delta);
-    free(f_eval);
-    free(jac_eval[0]);
-    free(jac_eval);
 
+    limpaVetores(delta, f_eval, jac_eval);
+
+    /* Retorna limite de iterações atingido */
     return MAX_IT;
 }
 
