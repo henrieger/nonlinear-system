@@ -4,6 +4,7 @@
 #ifndef __GAUSS__
 #define __GAUSS__
 
+/* Possiveis tipos de solução de sistema */
 enum t_sistemas {
     SPD, /* Sistema Possível e Determinado */
     SPI, /* Sistema Possível e Indeterminado */

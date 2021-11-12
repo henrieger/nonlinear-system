@@ -19,6 +19,7 @@ double norma(double *a, int n) {
     return max;
 }
 
+/* Libera memória dos vetores auxiliares */
 void limpaVetores(double *delta, double *f_eval, double **jac_eval) {
     free(delta);
     free(f_eval);

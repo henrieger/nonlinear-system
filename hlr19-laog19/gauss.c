@@ -39,10 +39,12 @@ void retrossubstituicao(int n, double **a, double *b, double *x) {
 
 enum t_sistemas gauss(int n, double **a, double *b, double *x) {
     for (int i = 0; i < n; i++) {
+        /* Pivoteamento parcial */
         int iPivo = encontraMax(n, a, i);
         if (iPivo != i)
             trocaLinhas(a, b, i, iPivo);
 
+        /* Calcula as transformações na matriz */
         for (int k = i+1; k < n; k++) {
             double m = a[k][i] / a[i][i];
             a[k][i] = 0;
@@ -54,12 +56,14 @@ enum t_sistemas gauss(int n, double **a, double *b, double *x) {
         }  
     }
 
+    /* Checa tipo de solução do sistema */
     if (a[n-1][n-1] == 0) {
         if (b[n-1] == 0)
             return SPI;
         return SI;
     }
 
+    /* Faz a substituição */
     retrossubstituicao(n, a, b, x);
     return SPD;
 }
