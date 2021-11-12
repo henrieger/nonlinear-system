@@ -3,6 +3,7 @@
 
 #include "newton.h"
 
+#include "saida.h"
 #include <matheval.h>
 #include <math.h>
 #include <stdio.h>
@@ -26,16 +27,19 @@ void *** jacobiana(void **f, int n, char **variaveis)
     jac[0] = (void **)malloc(n * n * sizeof(void *));
 
     for (int i = 0; i < n-1; i++)
-    {
         jac[i+1] = jac[i]+n;
+
+    for (int i = 0; i < n; i++)
+    {
         for (int j = 0; j < n; j++)
             jac[i][j] = evaluator_derivative(f[i], variaveis[j]);
     }
+    
 
     return jac;
 }
 
-enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, int max_it, char **variaveis)
+enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, int max_it, char **variaveis, FILE *arqout)
 {
     /* Declaração de vetores auxiliares */
     double *delta = (double *)malloc(n * sizeof(double)); /* Vetor delta */
@@ -91,6 +95,8 @@ enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, 
         for (int i = 0; i < n; i++)
             x[i] = x[i] + delta[i];
             
+        /* Imprime os resultados atuais do sistema na saida definida */
+        printResultados(arqout, x, n, variaveis);
 
         /* Checa condição de parada 2 */
         if(norma(delta, n) < epsilon)

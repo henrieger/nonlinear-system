@@ -5,6 +5,7 @@
 #include "vetores.h"
 #include "gauss.h"
 #include "newton.h"
+#include "saida.h"
 
 #include <math.h>
 #include <matheval.h>
@@ -25,6 +26,7 @@ int main(int argc, char *argv[]) {
 
         /* Declarando e lendo vetor de funções */
         void **f = vetorFuncoes(dimensao, funcao);
+        printSistema(arqout, f, dimensao);
 
         /* Declarando e lendo vetor de aproximações */
         double *aprox = vetorAproximacoes(dimensao);
@@ -46,7 +48,7 @@ int main(int argc, char *argv[]) {
         double *x = (double *)calloc(dimensao, sizeof(double));
 
         /* Resolver por método de Newton */
-        enum t_sistemas newtonRes = newton(f, j, dimensao, x, epsilon, maxIt, variaveis);
+        enum t_sistemas newtonRes = newton(f, j, dimensao, x, epsilon, maxIt, variaveis, arqout);
 
         /* Checando tipo de sistema */
         switch (newtonRes)
@@ -57,11 +59,13 @@ int main(int argc, char *argv[]) {
             break;
 
         case SPI:
-            fprintf(stderr, "Sistema Possível e Indeterminado");
+            printSistema(stderr, f, dimensao);
+            fprintf(stderr, "Sistema Possível e Indeterminado\n\n");
             break;
 
         case SI:
-            fprintf(stderr, "Sistema Impossível");
+            printSistema(stderr, f, dimensao);
+            fprintf(stderr, "Sistema Impossível\n\n");
             break;
 
         default:

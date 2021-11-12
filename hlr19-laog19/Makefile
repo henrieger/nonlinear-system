@@ -5,14 +5,15 @@ CC = gcc
 CFLAGS = -Wall
 LDLIBS = -lm -lmatheval
 
-objects = vetores.o linhaComando.o utils.o newton.o gauss.o
+objects = vetores.o linhaComando.o utils.o newton.o gauss.o saida.o
 
 all: newtonSNL
 
 newtonSNL: newtonSNL.c $(objects)
 vetores.o: vetores.c vetores.h
 linhaComando.o: linhaComando.c linhaComando.h
-newton.o: newton.c newton.h gauss.o
+saida.o: saida.c saida.h
+newton.o: newton.c newton.h gauss.o saida.o
 gauss.o: gauss.c gauss.h
 utils.o: utils.c utils.h
 
