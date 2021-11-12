@@ -25,28 +25,30 @@ char ** vetorVariaveis(int n, void ** f, int * tamVar) {
     char ** variaveis = malloc(n*sizeof(char *));
     for (int i = 0; i < n; i++) {
         variaveis[i] = malloc(4*sizeof(char));
-        variaveis[i] = "";
+        // variaveis[i] = "";
+        sprintf(variaveis[i], "x%d", i+1);
     }
-    char ** aux;
-    int tamAux, tamVariaveis = 0;
+    // char ** aux;
+    // int tamAux, tamVariaveis = 0;
 
-    /* Preenche vetor de variaveis */
-    for (int i = 0; i < n; i++) {
-        evaluator_get_variables (f[i], &aux, &tamAux);
-        for (int j = 0; j < tamAux; j++) {
-            for (int k = 0; k < tamVariaveis; k++) {
-                if (strcmp(variaveis[k], aux[j]) == 0) {
-                    aux[j] = "";
-                    k = tamVariaveis+1;
-                }
-            }
-            if (strcmp(aux[j], "") != 0) {
-                variaveis[tamVariaveis] = aux[j];
-                tamVariaveis++;
-            }
-        }
-    }
-    free(aux);
-    *tamVar = tamVariaveis;
+    // /* Preenche vetor de variaveis */
+    // for (int i = 0; i < n; i++) {
+    //     evaluator_get_variables (f[i], &aux, &tamAux);
+    //     for (int j = 0; j < tamAux; j++) {
+    //         for (int k = 0; k < tamVariaveis; k++) {
+    //             if (strcmp(variaveis[k], aux[j]) == 0) {
+    //                 aux[j] = "";
+    //                 k = tamVariaveis+1;
+    //             }
+    //         }
+    //         if (strcmp(aux[j], "") != 0) {
+    //             variaveis[tamVariaveis] = aux[j];
+    //             tamVariaveis++;
+    //         }
+    //     }
+    // }
+    // free(aux);
+    // *tamVar = tamVariaveis;
+    
     return variaveis;
 }
