@@ -7,17 +7,34 @@
 
 void ** vetorFuncoes(int n, char * funcao) {
     void **f = (void **)malloc(n * sizeof(void*));
+    int sucesso;
     for (int i = 0; i < n; i++) {
-        scanf("%s", funcao);
-        f[i] = evaluator_create(funcao);
+        sucesso = scanf("%s", funcao);
+        if (sucesso) {
+            f[i] = evaluator_create(funcao);
+            if (f[i] == NULL) {
+                fprintf(stderr, "Houve um erro durante o processamento da função. Encerrando o programa.\n");
+                exit(1);
+            }
+        }
+        else {
+            fprintf(stderr, "Houve um erro na leitura da função. Encerrando o programa.\n");
+            exit(1);
+        }
     }
     return f;
 }
 
 double * vetorAproximacoes(int n) {
     double *aprox = (double *)malloc(n * sizeof(double*));
-    for (int i = 0; i < n; i++)
-        scanf("%lf", &aprox[i]);
+    int sucesso;
+    for (int i = 0; i < n; i++) {
+        sucesso = scanf("%lf", &aprox[i]);
+        if (!sucesso) {
+            fprintf(stderr, "Houve um erro na leitura da aproximação. Encerrando o programa.\n");
+            exit(1);
+        }
+    }
     return aprox;
 }
 
@@ -39,8 +56,13 @@ void *** jacobiana(void **f, int n, char **variaveis) {
         jac[i+1] = jac[i]+n;
 
     for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++)
+        for (int j = 0; j < n; j++) {
             jac[i][j] = evaluator_derivative(f[i], variaveis[j]);
+            if (jac[i][j] == NULL) {
+                fprintf(stderr, "Houve um erro durante o cálculo da derivada parcial. Encerrando o programa.\n");
+                exit(1);
+            }
+        }
     }
 
     return jac;

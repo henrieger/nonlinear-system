@@ -12,4 +12,7 @@ void printSistema(FILE *arqout, void **f, int n);
 /*Imprime resultados na saida definida */
 void printResultados(FILE *arqout, double *x, int n, char **variaveis);
 
+/* Imprime tempos calculados na saída definida */
+void printTempos(FILE *arqout, double tempoTotal, double tempoDerivada, double tempoJacobiana, double tempoSL);
+
 #endif

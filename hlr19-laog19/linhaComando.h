@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#define MAX 50
+
 /*
 Lê os dados em argv. Se a opção presente for -o, abre o arquivo passado por argumento para escrita. Senão, retorna stdout para escrita.
 */

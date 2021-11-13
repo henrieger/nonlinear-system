@@ -27,10 +27,14 @@ void limpaVetores(double *delta, double *f_eval, double **jac_eval) {
     free(jac_eval);
 }
 
-enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, int maxIt, char **variaveis, FILE *arqout) {
+enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, int maxIt, char **variaveis, FILE *arqout, double * tempoJac, double * tempoSL) {
     /* Declaração de vetores auxiliares */
     double *delta = (double *)malloc(n * sizeof(double)); /* Vetor delta */
     double *f_eval = (double *)malloc(n * sizeof(double)); /* F(X) */
+
+    /* Declaração de variáveis auxiliares para cálculo de tempo */
+    double tempoJacAux;
+    double tempoSLAux;
     
     /* J(X) */
     double **jac_eval = (double **)malloc(n * sizeof(double *)); 
@@ -58,12 +62,23 @@ enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, 
             f_eval[i] = -f_eval[i];
             
             /* Calcula J(X) */
+            tempoJacAux = timestamp();
             for (int j = 0; j < n; j++)
                 jac_eval[i][j] = evaluator_evaluate(jac[i][j], 1, variaveis, x);
+
+            /* Cálculo de tempo da jacobiana */
+            tempoJacAux = timestamp() - tempoJacAux;
+            *tempoJac = *tempoJac + tempoJacAux;
         }
 
         /* Calcula o sistema linear pelo método de Gauss */
+        tempoSLAux = timestamp();
         int sisLinear = gauss(n, jac_eval, f_eval, delta);
+
+        /* Cálculo de tempo do sistema linear */
+        tempoSLAux = timestamp() - tempoSLAux;
+        *tempoSL = *tempoSL + tempoSLAux;
+
         if (sisLinear != SPD) {
             limpaVetores(delta, f_eval, jac_eval);
             return sisLinear;

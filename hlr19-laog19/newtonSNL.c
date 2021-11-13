@@ -6,6 +6,7 @@
 #include "gauss.h"
 #include "newton.h"
 #include "saida.h"
+#include "utils.h"
 
 #include <math.h>
 #include <matheval.h>
@@ -19,7 +20,7 @@ int main(int argc, char *argv[]) {
     /* Declarações de variáveis e leitura dos dados */
     int dimensao, maxIt;
     char funcao[MAX];
-    double epsilon;
+    double epsilon, tempoTotal, tempoDerivada, tempoJacobiana, tempoSL;
 
     /* Lê dimensão testando se entrada acabou */
     while (scanf("%d", &dimensao) != EOF) {
@@ -41,11 +42,21 @@ int main(int argc, char *argv[]) {
         int tamVariaveis;
         char ** variaveis = vetorVariaveis(dimensao, f, &tamVariaveis);
 
+        /* Inicia cálculo do tempo total */
+        tempoTotal = timestamp();
+
         /* Criando matriz de derivadas parciais (jacobiana) */
+        tempoDerivada = timestamp();
         void ***j = jacobiana(f, dimensao, variaveis);
+        tempoDerivada = timestamp() - tempoDerivada;
 
         /* Resolver por método de Newton */
-        enum t_sistemas newtonRes = newton(f, j, dimensao, aprox, epsilon, maxIt, variaveis, arqout);
+        tempoJacobiana = 0;
+        tempoSL = 0;
+        enum t_sistemas newtonRes = newton(f, j, dimensao, aprox, epsilon, maxIt, variaveis, arqout, &tempoJacobiana, &tempoSL);
+
+        /* Finaliza cálculo do tempo total */
+        tempoTotal = timestamp() - tempoTotal;
 
         /* Checando tipo de sistema */
         switch (newtonRes) {
@@ -66,6 +77,9 @@ int main(int argc, char *argv[]) {
             fprintf(stderr, "Sistema Impossível\n\n");
             break;
         }
+
+        /* Imprime tempos */
+        printTempos(arqout, tempoTotal, tempoDerivada, tempoJacobiana, tempoSL);
 
         /* Liberando memória */
         free(f);
