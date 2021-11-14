@@ -23,5 +23,5 @@ void printTempos(FILE *arqout, double tempoTotal, double tempoDerivada, double t
     fprintf(arqout, "# Tempo Derivadas: %lf\n", tempoDerivada);
     fprintf(arqout, "# Tempo Jacobiana: %lf\n", tempoJacobiana);
     fprintf(arqout, "# Tempo SL: %lf\n", tempoSL);
-    fprintf(arqout, "###########\n");
+    fprintf(arqout, "###########\n\n");
 }

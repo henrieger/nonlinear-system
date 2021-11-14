@@ -58,13 +58,9 @@ int main(int argc, char *argv[]) {
 
         /* Checando tipo de sistema */
         switch (newtonRes) {
-        case SPD:
-            // TODO: print resultados
-            break;
         case MAX_IT:
-            // TODO: print resultados
             printSistema(stderr, f, dimensao);
-            fprintf(stderr, "Limite de Iterações atingido\n\n");
+            fprintf(stderr, "Limite de iterações atingido\n\n");
             break;
         case SPI:
             printSistema(stderr, f, dimensao);
@@ -73,6 +69,8 @@ int main(int argc, char *argv[]) {
         case SI:
             printSistema(stderr, f, dimensao);
             fprintf(stderr, "Sistema Impossível\n\n");
+            break;
+        default:
             break;
         }
 
