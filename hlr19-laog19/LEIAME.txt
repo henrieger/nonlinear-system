@@ -1,3 +1,22 @@
 Autores:
     Henrique Luiz Rieger - GRR20190357 - hlr19
     Leon Augusto Okida Gonçalves - GRR20190365 - laog19
+
+Documentação:
+    Funções de linhaComando.h - tratam a linha de comando, definindo arquivo de saída:
+        abreArquivo(): Recebe como parâmetros argc e argv, lidos da linha de comando. Detecta se a opção "-o" foi utilizada. Se sim, abre um arquivo com o nome indicado como argumento para escrita; caso contrário, define a saída padrão como arquivo para escrita.
+    
+    Funções de vetores.h - alocam e preenchem os vetores utilizados no programa:
+        vetorFuncoes(): Recebe como parâmetros a dimensão do sistema e uma string. Aloca dinamicamente um vetor de ponteiros para void, que será usado como o vetor de funções. Lê as strings da entrada (quantidade de strings lidas é definida pela dimensão), chama a função evaluator_create para transformar as strings em funções e as armazena no vetor, que no final é retornado. Se houver algum problema na leitura ou processamento da função, o programa é encerrado.
+        vetorAproximacoes(): Recebe como parâmetro a dimensão do sistema. Aloca dinamicamente um vetor de doubles, que será usado como o vetor de aproximações iniciais da resolução do sistema. O vetor é preenchido pela entrada no for (até a dimensão) e é retornado ao fim da função. Se houver algum problema durante a leitura, o programa é encerrado.
+        vetorVariaveis(): Recebe como parâmetro a dimensão do sistema (n). Aloca dinamicamente um vetor de strings, que armazenará as n variáveis do sistema. Elas são escritas no vetor durante o laço, na forma x{i+1}, onde i é o laço da iteração. Ao final da função, esse vetor é retornado.
+        jacobiana(): Recebe como parâmetros o vetor de funções, a dimensão do sistema e o vetor de variáveis. Aloca dinamicamente uma matriz do tipo void *, que armazenará as variáveis parciais. No laço aninhado, cada elemento[i][j] recebe a derivada parcial da i-ésima função do vetor de funções com relação à j-ésima variável do vetor de variáveis. Ao final da função, a matriz é retornada. Se houver algum problema durante o cálculo das derivadas parciais, o programa é encerrado.
+
+    Funções de newton.h:
+
+    Funções de gauss.h:
+
+    Funções de saída.h - imprimem informações no arquivo de saída:
+        printSistema(): Recebe como parâmetros o arquivo de saída, o vetor de funções e a dimensão do sistema (n). No laço, cada função do vetor é impressa no arquivo de escrita.
+        printResultados(): Recebe como parâmetros o arquivo de saída, o vetor de resultados, a dimensão do sistema (n) e o vetor de variáveis. No laço, cada variável é impressa, com seu respectivo resultado, no arquivo de saída.
+        printTempos(): Recebe como parâmetros o arquivo de saída e as variáveis que controlam, respectivamente, o tempo total, o tempo de cálculo das derivadas, o tempo de preencher as jacobianas e o tempo de resolução dos sistemas lineares. Os tempos são impressos no arquivo de saída.

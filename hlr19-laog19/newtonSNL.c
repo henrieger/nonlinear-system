@@ -20,17 +20,18 @@ int main(int argc, char *argv[]) {
     /* Declarações de variáveis e leitura dos dados */
     int dimensao, maxIt;
     char funcao[MAX];
-    double epsilon, tempoTotal, tempoDerivada, tempoJacobiana, tempoSL;
+    double epsilon, tempoTotal, tempoDerivada, tempoJacobiana = 0, tempoSL = 0;
 
     /* Lê dimensão testando se entrada acabou */
     while (scanf("%d", &dimensao) != EOF) {
 
         /* Declarando e lendo vetor de funções */
         void **f = vetorFuncoes(dimensao, funcao);
-        printSistema(arqout, f, dimensao);
 
         /* Declarando e lendo vetor de aproximações */
         double *aprox = vetorAproximacoes(dimensao);
+
+        printSistema(arqout, f, dimensao);
 
         /* Lendo epsilon */
         scanf("%lf", &epsilon);
@@ -39,8 +40,7 @@ int main(int argc, char *argv[]) {
         scanf("%d", &maxIt);
 
         /* Obtendo variáveis do sistema */
-        int tamVariaveis;
-        char ** variaveis = vetorVariaveis(dimensao, f, &tamVariaveis);
+        char ** variaveis = vetorVariaveis(dimensao);
 
         /* Inicia cálculo do tempo total */
         tempoTotal = timestamp();
@@ -51,8 +51,6 @@ int main(int argc, char *argv[]) {
         tempoDerivada = timestamp() - tempoDerivada;
 
         /* Resolver por método de Newton */
-        tempoJacobiana = 0;
-        tempoSL = 0;
         enum t_sistemas newtonRes = newton(f, j, dimensao, aprox, epsilon, maxIt, variaveis, arqout, &tempoJacobiana, &tempoSL);
 
         /* Finaliza cálculo do tempo total */
