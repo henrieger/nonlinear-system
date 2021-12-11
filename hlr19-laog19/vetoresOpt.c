@@ -1,7 +1,7 @@
 /* Henrique Luiz Rieger - GRR20190357 - hlr19 */
 /* Leon Augusto Okida Gonçalves - GRR20190365 - laog19 */
 
-#include "vetores.h"
+#include "vetoresOpt.h"
 #include "utils.h"
 #include <matheval.h>
 #include <string.h>
@@ -49,23 +49,17 @@ char ** vetorVariaveis(int n) {
     return variaveis;
 }
 
-void *** jacobiana(void **f, int n, char **variaveis, double * tempo) {
-    void *** jac = (void ***)malloc(n * sizeof(void **));
-    jac[0] = (void **)malloc(n * n * sizeof(void *));
-
-    for (int i = 0; i < n-1; i++)
-        jac[i+1] = jac[i]+n;
-
+void ** jacobiana(void **f, int n, char **variaveis, double * tempo) {
+    void ** jac = (void **)malloc(n * n * sizeof(void *));
     *tempo = timestamp();
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++) {
-            jac[i][j] = evaluator_derivative(f[i], variaveis[j]);
-            if (jac[i][j] == NULL) {
+            jac[(i * n) + j] = evaluator_derivative(f[i], variaveis[j]);
+            if (jac[(i * n) + j] == NULL) {
                 fprintf(stderr, "Houve um erro ao calcular as derivadas parciais. Encerrando o programa");
                 exit(1);
             }
         }
-    }
     *tempo = timestamp() - *tempo;
 
     return jac;

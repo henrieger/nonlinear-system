@@ -1,0 +1,5 @@
+1 - Estrutura da matriz de derivadas parciais
+    Acesso rápido à memória, pois os elementos estão em posições contíguas. Boa localidade de referências.
+
+2 - Mudança no cálculo de tempo de derivadas parciais
+    Não inclui mais a alocação de memória. Feita também na original.

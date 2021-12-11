@@ -17,6 +17,6 @@ double * vetorAproximacoes(int n);
 char ** vetorVariaveis(int n);
 
 /* Declara, aloca e preenche a matriz jacobiana */
-void *** jacobiana(void **f, int n, char **variaveis, double * tempo);
+void ** jacobiana(void **f, int n, char **variaveis, double * tempo);
 
 #endif

@@ -2,9 +2,9 @@
 /* Leon Augusto Okida Gonçalves - GRR20190365 - laog19 */
 
 #include "linhaComando.h"
-#include "vetores.h"
-#include "gauss.h"
-#include "newton.h"
+#include "vetoresOpt.h"
+#include "gaussOpt.h"
+#include "newtonOpt.h"
 #include "saida.h"
 #include "utils.h"
 
@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
         tempoTotal = timestamp();
 
         /* Criando matriz de derivadas parciais (jacobiana) */
-        void ***j = jacobiana(f, dimensao, variaveis, &tempoDerivada);
+        void **j = jacobiana(f, dimensao, variaveis, &tempoDerivada);
 
         /* Resolver por método de Newton */
         enum t_sistemas newtonRes = newton(f, j, dimensao, aprox, epsilon, maxIt, variaveis, arqout, &tempoJacobiana, &tempoSL);
@@ -57,10 +57,8 @@ int main(int argc, char *argv[]) {
         /* Checando tipo de sistema */
         switch (newtonRes) {
         case SPD:
-            // TODO: print resultados
             break;
         case MAX_IT:
-            // TODO: print resultados
             printSistema(stderr, f, dimensao);
             fprintf(stderr, "Limite de Iterações atingido\n\n");
             break;
