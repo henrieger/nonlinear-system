@@ -12,9 +12,11 @@ Documentação:
         vetorVariaveis(): Recebe como parâmetro a dimensão do sistema (n). Aloca dinamicamente um vetor de strings, que armazenará as n variáveis do sistema. Elas são escritas no vetor durante o laço, na forma x{i+1}, onde i é o laço da iteração. Ao final da função, esse vetor é retornado.
         jacobiana(): Recebe como parâmetros o vetor de funções, a dimensão do sistema e o vetor de variáveis. Aloca dinamicamente uma matriz do tipo void *, que armazenará as variáveis parciais. No laço aninhado, cada elemento[i][j] recebe a derivada parcial da i-ésima função do vetor de funções com relação à j-ésima variável do vetor de variáveis. Ao final da função, a matriz é retornada. Se houver algum problema durante o cálculo das derivadas parciais, o programa é encerrado.
 
-    Funções de newton.h:
+    Funções de newton.h - Calcula o sistema não-linear pelo método de Newton:
+	newton(): Recebe como parâmetros o vetor de equações não-lineares, a matriz jacobiana, a dimensão do sistema, o vetor de resultados (já preenchido com as aproximações iniciais), o epsilon, o número máximo de iterações do método, o vetor com os nomes das variáveis, o arquivo de saída das impressões e os endereços do tempo do cálculo da jacobiana e do sistema linear. Calcula o sistema não-linear utilizando o método de Newton, a partir de várias iterações de sistemas lineares resolvidos com o método de Gauss, e coloca os resultados no vetor de resultados, em caso de sucesso. Também computa o tempo para calcular a matriz jacobiana e para resolução dos sistemas lineares. Retorna um valor de enum representando se o sistema é SPD, SPI, SI ou SPD mas atingindo o número máximo de iterações.
 
-    Funções de gauss.h:
+    Funções de gauss.h - Calculam um sistema linear pelo método de Gauss:
+	gauss(): Recebe como parâmetros a dimensão do sistema, a matriz de coeficientes, o vetor de termos independentes e o vetor de variáveis. Resolve o sistema linear formado pelos coeficientes e termos independentes pelo método de Gauss com pivoteamento parcial, e coloca os resultados no vetor de variáveis em caso de sucesso. Retorna um valor de enum representando se o sistema é SPD, SPI ou SI.
 
     Funções de saída.h - imprimem informações no arquivo de saída:
         printSistema(): Recebe como parâmetros o arquivo de saída, o vetor de funções e a dimensão do sistema (n). No laço, cada função do vetor é impressa no arquivo de escrita.
