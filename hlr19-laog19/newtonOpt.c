@@ -8,6 +8,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <likwid.h>
 
 /* Devolve a norma do vetor a, de tamanho n */
 double norma(double *a, int n) {
@@ -63,8 +64,10 @@ enum t_sistemas newton(void **f, void **jac, int n, double *x, double epsilon, i
             
             /* Calcula J(X) */
             tempoJacAux = timestamp();
+            LIKWID_MARKER_START("matriz_jacobiana_opt");
             for (int j = 0; j < n; j++)
                 jac_eval[i][j] = evaluator_evaluate(jac[(i * n) + j], 1, variaveis, x);
+            LIKWID_MARKER_STOP("matriz_jacobiana_opt");
 
             /* Cálculo de tempo da jacobiana */
             tempoJacAux = timestamp() - tempoJacAux;
@@ -77,7 +80,9 @@ enum t_sistemas newton(void **f, void **jac, int n, double *x, double epsilon, i
 
         /* Cálculo de tempo do sistema linear */
         tempoSLAux = timestamp() - tempoSLAux;
+        LIKWID_MARKER_START("sistema_linear_opt");
         *tempoSL = *tempoSL + tempoSLAux;
+        LIKWID_MARKER_STOP("sistema_linear_opt");
 
         if (sisLinear != SPD) {
             limpaVetores(delta, f_eval, jac_eval);

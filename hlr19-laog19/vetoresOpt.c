@@ -5,6 +5,7 @@
 #include "utils.h"
 #include <matheval.h>
 #include <string.h>
+#include <likwid.h>
 
 void ** vetorFuncoes(int n, char * funcao) {
     void **f = (void **)malloc(n * sizeof(void*));
@@ -52,6 +53,7 @@ char ** vetorVariaveis(int n) {
 void ** jacobiana(void **f, int n, char **variaveis, double * tempo) {
     void ** jac = (void **)malloc(n * n * sizeof(void *));
     *tempo = timestamp();
+    LIKWID_MARKER_START("derivadas_parciais_opt");
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++) {
             jac[(i * n) + j] = evaluator_derivative(f[i], variaveis[j]);
@@ -60,6 +62,7 @@ void ** jacobiana(void **f, int n, char **variaveis, double * tempo) {
                 exit(1);
             }
         }
+    LIKWID_MARKER_STOP("derivadas_parciais_opt");
     *tempo = timestamp() - *tempo;
 
     return jac;

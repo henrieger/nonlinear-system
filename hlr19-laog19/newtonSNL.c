@@ -10,10 +10,13 @@
 
 #include <math.h>
 #include <matheval.h>
+#include <likwid.h>
 
 #define MAX 50
 
 int main(int argc, char *argv[]) {
+    LIKWID_MARKER_INIT;
+
     /* Decide se escreve em um arquivo ou na stdout */
     FILE* arqout = abreArquivo(argc, argv);
 
@@ -21,6 +24,7 @@ int main(int argc, char *argv[]) {
     int dimensao, maxIt;
     char funcao[MAX];
     double epsilon, tempoTotal, tempoDerivada = 0, tempoJacobiana = 0, tempoSL = 0;
+
 
     /* Lê dimensão testando se entrada acabou */
     while (scanf("%d", &dimensao) != EOF) {
@@ -48,8 +52,12 @@ int main(int argc, char *argv[]) {
         /* Criando matriz de derivadas parciais (jacobiana) */
         void ***j = jacobiana(f, dimensao, variaveis, &tempoDerivada);
 
+
         /* Resolver por método de Newton */
+        LIKWID_MARKER_START("newton");
         enum t_sistemas newtonRes = newton(f, j, dimensao, aprox, epsilon, maxIt, variaveis, arqout, &tempoJacobiana, &tempoSL);
+        LIKWID_MARKER_STOP("newton");
+
 
         /* Finaliza cálculo do tempo total */
         tempoTotal = timestamp() - tempoTotal;
@@ -84,5 +92,7 @@ int main(int argc, char *argv[]) {
     }
     
     fclose(arqout);
+
+    LIKWID_MARKER_CLOSE;
     return 0;
 }

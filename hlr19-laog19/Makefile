@@ -2,12 +2,12 @@
 # Leon Augusto Okida Gonçalves - GRR20190365 - laog19
 
 LIKWID = /home/soft/likwid
-LIKWID_FLAGS = -I$(LIKWID)/include -DLIKWID_PERFMON 
+LIKWID_FLAGS = -DLIKWID_PERFMON -I$(LIKWID)/include
 LIKWID_LIBS = -L$(LIKWID)/lib -llikwid
 
-CC = gcc $(LIKWID_FLAGS) $(LIKWID_LIBS)
-CFLAGS = -Wall -O3 -mavx -march=native
-LDLIBS = -lm -lmatheval
+CC = gcc
+CFLAGS = $(LIKWID_FLAGS) -Wall -O3 -mavx -march=native
+LDLIBS = $(LIKWID_LIBS) -lm -lmatheval
 
 objects = vetores.o linhaComando.o utils.o newton.o gauss.o saida.o
 objectsOpt = vetoresOpt.o linhaComando.o utils.o newtonOpt.o gaussOpt.o saida.o
