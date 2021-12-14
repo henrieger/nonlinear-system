@@ -8,7 +8,7 @@
 #include <likwid.h>
 
 void ** vetorFuncoes(int n, char * funcao) {
-    void **f = (void **)malloc(n * sizeof(void*));
+    void **f = (void **)malloc(PAD(n) * sizeof(void*));
     int sucesso;
     for (int i = 0; i < n; i++) {
         sucesso = scanf("%s", funcao);
@@ -28,7 +28,7 @@ void ** vetorFuncoes(int n, char * funcao) {
 }
 
 double * vetorAproximacoes(int n) {
-    double *aprox = (double *)malloc(n * sizeof(double*));
+    double *aprox = (double *)malloc(PAD(n) * sizeof(double*));
     int sucesso;
     for (int i = 0; i < n; i++) {
         sucesso = scanf("%lf", &aprox[i]);
@@ -41,9 +41,9 @@ double * vetorAproximacoes(int n) {
 }
 
 char ** vetorVariaveis(int n) {
-    char ** variaveis = malloc(n*sizeof(char *));
+    char ** variaveis = malloc(PAD(n)*sizeof(char *));
     for (int i = 0; i < n; i++) {
-        variaveis[i] = malloc(4*sizeof(char));
+        variaveis[i] = malloc(7*sizeof(char));
         sprintf(variaveis[i], "x%d", i+1);
     }
 
@@ -51,7 +51,7 @@ char ** vetorVariaveis(int n) {
 }
 
 void ** jacobiana(void **f, int n, char **variaveis, double * tempo) {
-    void ** jac = (void **)malloc(n * n * sizeof(void *));
+    void ** jac = (void **)malloc(PAD(n * n) * sizeof(void *));
     *tempo = timestamp();
     LIKWID_MARKER_START("derivadas_parciais_opt");
     for (int i = 0; i < n; i++)

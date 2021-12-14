@@ -3,3 +3,6 @@
 
 2 - Mudança no cálculo de tempo de derivadas parciais
     Não inclui mais a alocação de memória. Feita também na original.
+
+3 - Padding nos vetores de tamanho 2^n
+    Macro inclusa no cabeçcalho utils.h
