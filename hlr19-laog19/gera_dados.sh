@@ -31,8 +31,8 @@ do
 
     FLOPS=$(grep 'DP \[MFLOP/s\]' flops_dp_$i.txt | cut -d'|' -f3)
     FLOPS_DP=($FLOPS)
-    echo $i ${FLOPS_DP[0]} ${FLOPS_DP[4]} >> flops_dp_derivadas.dat
-    echo $i ${FLOPS_DP[1]} ${FLOPS_DP[5]} >> flops_dp_newton.dat
-    echo $i ${FLOPS_DP[2]} ${FLOPS_DP[6]} >> flops_dp_matriz.dat
-    echo $i ${FLOPS_DP[3]} ${FLOPS_DP[7]} >> flops_dp_sistema.dat
+    echo $i ${FLOPS_DP[0]} ${FLOPS_DP[1]} ${FLOPS_DP[8]} ${FLOPS_DP[9]} >> flops_dp_derivadas.dat
+    echo $i ${FLOPS_DP[2]} ${FLOPS_DP[3]} ${FLOPS_DP[10]} ${FLOPS_DP[11]} >> flops_dp_newton.dat
+    echo $i ${FLOPS_DP[4]} ${FLOPS_DP[5]} ${FLOPS_DP[12]} ${FLOPS_DP[13]} >> flops_dp_matriz.dat
+    echo $i ${FLOPS_DP[6]} ${FLOPS_DP[7]} ${FLOPS_DP[14]} ${FLOPS_DP[15]} >> flops_dp_sistema.dat
 done

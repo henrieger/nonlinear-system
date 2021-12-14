@@ -22,10 +22,10 @@ rm l2*.txt
 rm flops*.txt
 
 # Gerando gráficos
-#echo "Gerando gráficos"
-#gnuplot ./plot_dados.gp
-#rm *.dat
-#clear
+echo "Gerando gráficos"
+gnuplot ./plot_dados.gp
+rm *.dat
+clear
 
 # Retornando para frequência original
 clear
