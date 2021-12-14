@@ -46,20 +46,16 @@ int main(int argc, char *argv[]) {
         /* Obtendo variáveis do sistema */
         char ** variaveis = vetorVariaveis(dimensao);
 
-        /* Inicia cálculo do tempo total */
-        tempoTotal = timestamp();
 
         /* Criando matriz de derivadas parciais (jacobiana) */
         void ***j = jacobiana(f, dimensao, variaveis, &tempoDerivada);
 
 
         /* Resolver por método de Newton */
+        tempoTotal = timestamp();
         LIKWID_MARKER_START("newton");
         enum t_sistemas newtonRes = newton(f, j, dimensao, aprox, epsilon, maxIt, variaveis, arqout, &tempoJacobiana, &tempoSL);
         LIKWID_MARKER_STOP("newton");
-
-
-        /* Finaliza cálculo do tempo total */
         tempoTotal = timestamp() - tempoTotal;
 
         /* Checando tipo de sistema */

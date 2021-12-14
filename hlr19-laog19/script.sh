@@ -11,15 +11,15 @@ clear
 ./broyden.sh
 
 # Gerando arquivos .dat
-#echo "Gerando arquivos de dados"
-#./gera_dados.sh
-#clear
+echo "Gerando arquivos de dados"
+./gera_dados.sh
+clear
 
 # Limpando arquivos temporários
 make clean
-#rm l3*.txt
-#rm l2*.txt
-#rm flops*.txt
+rm l3*.txt
+rm l2*.txt
+rm flops*.txt
 
 # Gerando gráficos
 #echo "Gerando gráficos"
