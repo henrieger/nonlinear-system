@@ -48,9 +48,9 @@ enum t_sistemas newton(void ** restrict f, void ** restrict jac, int n, double *
         /* Imprime os resultados atuais do sistema na saida definida */
         printResultados(arqout, x, n, variaveis);
 
-        /* Calcula os resultados do sistema encontrados até o momento */
+        /* Calcula os resultados do sistema encontrados até o momento e inverte para o cálculo do delta */
         for (int i = 0; i < n; i++)
-            f_eval[i] = evaluator_evaluate(f[i], n, variaveis, x);
+            f_eval[i] = -evaluator_evaluate(f[i], n, variaveis, x);
 
         /* Checa condição de parada 1 */
         if (norma(f_eval, n) < epsilon) {
@@ -58,10 +58,7 @@ enum t_sistemas newton(void ** restrict f, void ** restrict jac, int n, double *
             return SPD;
         }
         
-        for (int i = 0; i < n; i++) {
-            /* Inverte valores de F(X) para cálculo do delta*/
-            f_eval[i] = -f_eval[i];
-            
+        for (int i = 0; i < n; i++) {       
             /* Calcula J(X) */
             tempoJacAux = timestamp();
             LIKWID_MARKER_START("matriz_jacobiana_opt");
