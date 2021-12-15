@@ -43,7 +43,7 @@ double * vetorAproximacoes(int n) {
 char ** vetorVariaveis(int n) {
     char ** variaveis = malloc(PAD(n)*sizeof(char *));
     for (int i = 0; i < n; i++) {
-        variaveis[i] = malloc(7*sizeof(char));
+        variaveis[i] = malloc(11*sizeof(char));
         sprintf(variaveis[i], "x%d", i+1);
     }
 
