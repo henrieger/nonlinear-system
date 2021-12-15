@@ -9,6 +9,6 @@
 #include <stdio.h>
 
 /* Calcula o sistema não-linear pelo método de Newton */
-enum t_sistemas newton(void **f, void **j, int n, double *x, double epsilon, int maxIt, char **variaveis, FILE *arqout, double * tempoJac, double * tempoSL);
+enum t_sistemas newton(void ** restrict f, void ** restrict j, int n, double * restrict x, double epsilon, int maxIt, char **variaveis, FILE *arqout, double * tempoJac, double * tempoSL);
 
 #endif

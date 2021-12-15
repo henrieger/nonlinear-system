@@ -15,7 +15,7 @@ int encontraMax(int n, double **a, int j) {
 }
 
 /* Troca linhas l1 e l2 de lugar em a e b */
-void trocaLinhas(double **a, double *b, int l1, int l2) {
+void trocaLinhas(double ** restrict a, double * restrict b, int l1, int l2) {
     double *auxA = a[l1];
     double auxB = b[l1];
 
@@ -27,7 +27,7 @@ void trocaLinhas(double **a, double *b, int l1, int l2) {
 }
 
 /* Calcula a retrossubstituição do sistema linear já transformado */
-void retrossubstituicao(int n, double **a, double *b, double *x) {
+void retrossubstituicao(int n, double ** restrict a, double * restrict b, double * restrict x) {
     x[n-1] = b[n-1] / a[n-1][n-1];
     for (int i = n-2; i >= 0; i--) {
         double m = a[i][i];
@@ -37,7 +37,7 @@ void retrossubstituicao(int n, double **a, double *b, double *x) {
     }
 }
 
-enum t_sistemas gauss(int n, double **a, double *b, double *x) {
+enum t_sistemas gauss(int n, double ** restrict a, double * restrict b, double * restrict x) {
     for (int i = 0; i < n; i++) {
         /* Pivoteamento parcial */
         int iPivo = encontraMax(n, a, i);

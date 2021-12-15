@@ -28,7 +28,7 @@ void limpaVetores(double *delta, double *f_eval, double **jac_eval) {
     free(jac_eval);
 }
 
-enum t_sistemas newton(void **f, void **jac, int n, double *x, double epsilon, int maxIt, char **variaveis, FILE *arqout, double * tempoJac, double * tempoSL) {
+enum t_sistemas newton(void ** restrict f, void ** restrict jac, int n, double * restrict x, double epsilon, int maxIt, char **variaveis, FILE *arqout, double * tempoJac, double * tempoSL) {
     /* Declaração de vetores auxiliares */
     double *delta = (double *)malloc(PAD(n) * sizeof(double)); /* Vetor delta */
     double *f_eval = (double *)malloc(PAD(n) * sizeof(double)); /* F(X) */

@@ -13,6 +13,6 @@ enum t_sistemas {
 };
 
 /* Calcula o sistema linear pelo método de Gauss com pivoteamento parcial */
-enum t_sistemas gauss(int n, double **a, double *b, double *x);
+enum t_sistemas gauss(int n, double ** restrict a, double * restrict b, double * restrict x);
 
 #endif
