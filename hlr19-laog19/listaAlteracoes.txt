@@ -6,3 +6,7 @@
 
 3 - Padding nos vetores de tamanho 2^n
     Macro inclusa no cabeçcalho utils.h
+
+4 - Uso de restrict pointers
+    Permite que o compilador entenda que não há dependências implícitas
+
