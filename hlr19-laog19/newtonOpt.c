@@ -76,13 +76,13 @@ enum t_sistemas newton(void ** restrict f, void ** restrict jac, int n, double *
 
         /* Calcula o sistema linear pelo método de Gauss */
         tempoSLAux = timestamp();
+        LIKWID_MARKER_START("sistema_linear_opt");
         int sisLinear = gauss(n, jac_eval, f_eval, delta);
+        LIKWID_MARKER_STOP("sistema_linear_opt");
 
         /* Cálculo de tempo do sistema linear */
         tempoSLAux = timestamp() - tempoSLAux;
-        LIKWID_MARKER_START("sistema_linear_opt");
         *tempoSL = *tempoSL + tempoSLAux;
-        LIKWID_MARKER_STOP("sistema_linear_opt");
 
         if (sisLinear != SPD) {
             limpaVetores(delta, f_eval, jac_eval);
