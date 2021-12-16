@@ -1,12 +1,12 @@
 1 - Estrutura da matriz de derivadas parciais
-    Acesso rápido à memória, pois os elementos estão em posições contíguas. Boa localidade de referências.
+    Alterada para considerar a tridiagonalidade da mesma. Acesso rápido à memória, pois os elementos estão em posições contíguas. Boa localidade de referências.
 
 2 - Mudança no cálculo de tempo de derivadas parciais
     Não inclui mais a alocação de memória. Feita também na original.
 
 3 - Padding nos vetores de tamanho 2^n
-    Macro inclusa no cabeçcalho utils.h
+    Macro inclusa no cabeçalho utils.h.
 
 4 - Uso de restrict pointers
-    Permite que o compilador entenda que não há dependências implícitas
+    Permite que o compilador entenda que não há dependências implícitas.
 

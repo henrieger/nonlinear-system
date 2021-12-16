@@ -81,7 +81,6 @@ int main(int argc, char *argv[]) {
         free(f);
         free(aprox);
         free(variaveis);
-        free(j[0]);
         free(j);
     }
     

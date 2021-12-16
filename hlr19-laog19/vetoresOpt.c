@@ -50,18 +50,50 @@ char ** vetorVariaveis(int n) {
     return variaveis;
 }
 
+/* */
+void checkDerivative(void **jac, int i)
+{
+    if (jac[i] == NULL) {
+        fprintf(stderr, "Houve um erro ao calcular as derivadas parciais. Encerrando o programa");
+        exit(1);
+    }
+}
+
 void ** jacobiana(void **f, int n, char **variaveis, double * tempo) {
-    void ** jac = (void **)malloc(PAD(n * n) * sizeof(void *));
+    void ** jac = (void **)malloc(3 * PAD(n) * sizeof(void *));
+
     *tempo = timestamp();
     LIKWID_MARKER_START("derivadas_parciais_opt");
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < n; j++) {
-            jac[(i * n) + j] = evaluator_derivative(f[i], variaveis[j]);
-            if (jac[(i * n) + j] == NULL) {
-                fprintf(stderr, "Houve um erro ao calcular as derivadas parciais. Encerrando o programa");
-                exit(1);
-            }
-        }
+
+    /* Cálculo da primeira linha */
+    jac[0] = evaluator_derivative(f[0], variaveis[1]);
+    checkDerivative(jac, 0);
+    jac[PAD(n)] = evaluator_derivative(f[0], variaveis[0]);
+    checkDerivative(jac, n);
+
+    /* Cálculo das linhas intermediárias */
+    for (int i = 1; i < n-1; i++) {
+        /* posição na diagonal de cima = i */
+        jac[i] = evaluator_derivative(f[i], variaveis[i+1]);
+        checkDerivative(jac, i);
+
+        /* posição na diagonal principal = PAD(n)+i */
+        int posPrinc = PAD(n)+i;
+        jac[posPrinc] = evaluator_derivative(f[i], variaveis[i]);
+        checkDerivative(jac, posPrinc);
+
+        /* posição na diagonal de baixo = 2*PAD(n)+i-1 */
+        int posAbaixo = 2*PAD(n)+i-1;
+        jac[posAbaixo] = evaluator_derivative(f[i+1], variaveis[i]);
+        checkDerivative(jac, posAbaixo);
+    }
+
+    /* Cálculo da última linha */
+    jac[2*PAD(n) - 1] = evaluator_derivative(f[n], variaveis[n]);
+    checkDerivative(jac, n);
+    jac[3*PAD(n) - 2] = evaluator_derivative(f[n], variaveis[n-1]);
+    checkDerivative(jac, n);
+
     LIKWID_MARKER_STOP("derivadas_parciais_opt");
     *tempo = timestamp() - *tempo;
 

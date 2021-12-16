@@ -25,7 +25,6 @@ void limpaVetores(double *delta, double *f_eval, double **jac_eval) {
     free(delta);
     free(f_eval);
     free(jac_eval[0]);
-    free(jac_eval);
 }
 
 enum t_sistemas newton(void ** restrict f, void ** restrict jac, int n, double * restrict x, double epsilon, int maxIt, char **variaveis, FILE *arqout, double * tempoJac, double * tempoSL) {
@@ -38,10 +37,10 @@ enum t_sistemas newton(void ** restrict f, void ** restrict jac, int n, double *
     double tempoSLAux;
     
     /* J(X) */
-    double **jac_eval = (double **)malloc(PAD(n) * sizeof(double *)); 
-    jac_eval[0] = (double *)malloc(PAD(n * n) * sizeof(double));    
-    for (int i = 0; i < n-1; i++)
-        jac_eval[i+1] = jac_eval[i]+n;
+    double *jac_eval[3];
+    jac_eval[0] = (double *)malloc(3 * PAD(n) * sizeof(double));
+    jac_eval[1] = jac_eval[0]+n;
+    jac_eval[2] = jac_eval[0]+2*n;
     
     /* Iterações do método de Newton */
     for (int k = 0; k < maxIt; k++) {
@@ -58,18 +57,33 @@ enum t_sistemas newton(void ** restrict f, void ** restrict jac, int n, double *
             return SPD;
         }
         
-        for (int i = 0; i < n; i++) {       
-            /* Calcula J(X) */
-            tempoJacAux = timestamp();
-            LIKWID_MARKER_START("matriz_jacobiana_opt");
-            for (int j = 0; j < n; j++)
-                jac_eval[i][j] = evaluator_evaluate(jac[(i * n) + j], 1, variaveis, x);
-            LIKWID_MARKER_STOP("matriz_jacobiana_opt");
+        /* Calcula J(X) */
+        tempoJacAux = timestamp();
+        LIKWID_MARKER_START("matriz_jacobiana_opt");
+            /* Cálculo da primeira linha */
+            jac_eval[0][0] = evaluator_evaluate(jac[0], 1, variaveis+1, x+1);
+            jac_eval[1][0] = evaluator_evaluate(jac[PAD(n)], 1, variaveis, x);
 
-            /* Cálculo de tempo da jacobiana */
-            tempoJacAux = timestamp() - tempoJacAux;
-            *tempoJac = *tempoJac + tempoJacAux;
-        }
+            /* Cálculo das linhas intermediárias */
+            for (int i = 1; i < n-1; i++) {
+                /* posição na diagonal de cima = i */
+                jac_eval[0][i] = evaluator_evaluate(jac[0], 1, variaveis+i+1, x+i+1);
+
+                /* posição na diagonal principal = PAD(n)+i */
+                jac_eval[1][i] = evaluator_evaluate(jac[PAD(n)+i], 1, variaveis+i, x+i);
+
+                /* posição na diagonal de baixo = 2*PAD(n)+i-1 */
+                jac_eval[2][i-1] = evaluator_evaluate(jac[2*PAD(n)+i-1], 1, variaveis+i-1, x+i-1);
+            }
+
+            /* Cálculo da última linha */
+            jac_eval[1][n-1] = evaluator_evaluate(jac[2*PAD(n) - 1], 1, variaveis+n-1, x+n-1);
+            jac_eval[2][n-2] = evaluator_evaluate(jac[3*PAD(n) - 2], 1, variaveis+n-2, x+n-2);
+        LIKWID_MARKER_STOP("matriz_jacobiana_opt");
+        
+        /* Cálculo de tempo da jacobiana */
+        tempoJacAux = timestamp() - tempoJacAux;
+        *tempoJac = *tempoJac + tempoJacAux;
 
         /* Calcula o sistema linear pelo método de Gauss */
         tempoSLAux = timestamp();
