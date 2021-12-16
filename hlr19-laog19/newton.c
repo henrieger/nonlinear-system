@@ -66,7 +66,7 @@ enum t_sistemas newton(void **f, void ***jac, int n, double *x, double epsilon, 
             tempoJacAux = timestamp();
             LIKWID_MARKER_START("matriz_jacobiana");
             for (int j = 0; j < n; j++)
-                jac_eval[i][j] = evaluator_evaluate(jac[i][j], 1, variaveis, x);
+                jac_eval[i][j] = evaluator_evaluate(jac[i][j], 1, variaveis+j, x+j);
             LIKWID_MARKER_STOP("matriz_jacobiana");
 
             /* Cálculo de tempo da jacobiana */

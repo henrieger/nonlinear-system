@@ -67,18 +67,18 @@ enum t_sistemas newton(void ** restrict f, void ** restrict jac, int n, double *
             /* Cálculo das linhas intermediárias */
             for (int i = 1; i < n-1; i++) {
                 /* posição na diagonal de cima = i */
-                jac_eval[0][i] = evaluator_evaluate(jac[0], 1, variaveis+i+1, x+i+1);
+                jac_eval[0][i] = evaluator_evaluate(jac[0], 1, variaveis, x);
 
                 /* posição na diagonal principal = PAD(n)+i */
-                jac_eval[1][i] = evaluator_evaluate(jac[PAD(n)+i], 1, variaveis+i, x+i);
+                jac_eval[1][i] = evaluator_evaluate(jac[PAD(n)+i], 1, variaveis, x);
 
                 /* posição na diagonal de baixo = 2*PAD(n)+i-1 */
-                jac_eval[2][i-1] = evaluator_evaluate(jac[2*PAD(n)+i-1], 1, variaveis+i-1, x+i-1);
+                jac_eval[2][i-1] = evaluator_evaluate(jac[2*PAD(n)+i-1], 1, variaveis, x);
             }
 
             /* Cálculo da última linha */
-            jac_eval[1][n-1] = evaluator_evaluate(jac[2*PAD(n) - 1], 1, variaveis+n-1, x+n-1);
-            jac_eval[2][n-2] = evaluator_evaluate(jac[3*PAD(n) - 2], 1, variaveis+n-2, x+n-2);
+            jac_eval[1][n-1] = evaluator_evaluate(jac[2*PAD(n) - 1], 1, variaveis, x);
+            jac_eval[2][n-2] = evaluator_evaluate(jac[3*PAD(n) - 2], 1, variaveis, x);
         LIKWID_MARKER_STOP("matriz_jacobiana_opt");
         
         /* Cálculo de tempo da jacobiana */
