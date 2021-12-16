@@ -18,10 +18,10 @@ do
 	#Executando testes
 	echo "Processando sistema de dimensão $N"
 	likwid-perfctr -C 7 -g L3 -m ./newtonSNL < entrada.txt >> l3_${N}.txt
-	likwid-perfctr -C 7 -g L2CACHE -m ./newtonSNL < entrada.txt >> l2cache_${N}.txt
+	likwid-perfctr -C 7 -g L2CACHE -m ./newtonSNL < entrada.txt -o resultados_${N}.txt >> l2cache_${N}.txt
 	likwid-perfctr -C 7 -g FLOPS_DP -m ./newtonSNL < entrada.txt >> flops_dp_${N}.txt
 	likwid-perfctr -C 7 -g L3 -m ./newtonSNLOpt < entrada.txt >> l3_${N}.txt
-	likwid-perfctr -C 7 -g L2CACHE -m ./newtonSNLOpt < entrada.txt >> l2cache_${N}.txt
+	likwid-perfctr -C 7 -g L2CACHE -m ./newtonSNLOpt < entrada.txt -o resultados__opt_${N}.txt >> l2cache_${N}.txt
 	likwid-perfctr -C 7 -g FLOPS_DP -m ./newtonSNLOpt < entrada.txt >> flops_dp_${N}.txt
 
 	rm entrada.txt
