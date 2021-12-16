@@ -54,7 +54,7 @@ char ** vetorVariaveis(int n) {
 void checkDerivative(void **jac, int i)
 {
     if (jac[i] == NULL) {
-        fprintf(stderr, "Houve um erro ao calcular as derivadas parciais. Encerrando o programa");
+        fprintf(stderr, "Houve um erro ao calcular as derivadas parciais. Encerrando o programa.\n");
         exit(1);
     }
 }
@@ -69,7 +69,7 @@ void ** jacobiana(void **f, int n, char **variaveis, double * tempo) {
     jac[0] = evaluator_derivative(f[0], variaveis[1]);
     checkDerivative(jac, 0);
     jac[PAD(n)] = evaluator_derivative(f[0], variaveis[0]);
-    checkDerivative(jac, n);
+    checkDerivative(jac, PAD(n));
 
     /* Cálculo das linhas intermediárias */
     for (int i = 1; i < n-1; i++) {
@@ -89,10 +89,10 @@ void ** jacobiana(void **f, int n, char **variaveis, double * tempo) {
     }
 
     /* Cálculo da última linha */
-    jac[2*PAD(n) - 1] = evaluator_derivative(f[n], variaveis[n]);
-    checkDerivative(jac, n);
-    jac[3*PAD(n) - 2] = evaluator_derivative(f[n], variaveis[n-1]);
-    checkDerivative(jac, n);
+    jac[2*PAD(n) - 1] = evaluator_derivative(f[n-1], variaveis[n-1]);
+    checkDerivative(jac, 2*PAD(n) - 1);
+    jac[3*PAD(n) - 2] = evaluator_derivative(f[n-1], variaveis[n-2]);
+    checkDerivative(jac, 3*PAD(n) - 2);
 
     LIKWID_MARKER_STOP("derivadas_parciais_opt");
     *tempo = timestamp() - *tempo;
