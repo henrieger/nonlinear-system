@@ -61,7 +61,7 @@ enum t_sistemas newton(void ** restrict f, void ** restrict jac, int n, double *
         tempoJacAux = timestamp();
         LIKWID_MARKER_START("matriz_jacobiana_opt");
             /* Cálculo da primeira linha */
-            jac_eval[0][0] = evaluator_evaluate(jac[0], 1, variaveis+1, x+1);
+            jac_eval[0][0] = evaluator_evaluate(jac[0], 1, variaveis, x);
             jac_eval[1][0] = evaluator_evaluate(jac[PAD(n)], 1, variaveis, x);
 
             /* Cálculo das linhas intermediárias */
