@@ -84,7 +84,7 @@ void ** jacobiana(void **f, int n, char **variaveis, double * tempo) {
 
         /* posição na diagonal de baixo = 2*PAD(n)+i-1 */
         int posAbaixo = 2*PAD(n)+i-1;
-        jac[posAbaixo] = evaluator_derivative(f[i+1], variaveis[i]);
+        jac[posAbaixo] = evaluator_derivative(f[i], variaveis[i-1]);
         checkDerivative(jac, posAbaixo);
     }
 
