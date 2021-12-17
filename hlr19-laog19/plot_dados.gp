@@ -34,6 +34,7 @@ set ylabel "tempo [ms]"
 set logscale y
 plot "tempo_newton.dat" using 2:xticlabels(1) title "Sem otimização" lc 7 lt 7 w lp , \
      "tempo_newton.dat" using 3:xticlabels(1) title "Com otimização" lc 6 lt 7 w lp
+unset logscale y
 
 #Derivadas parciais
 
@@ -67,6 +68,7 @@ set ylabel "tempo [ms]"
 set logscale y
 plot "tempo_derivadas.dat" using 2:xticlabels(1) title "Sem otimização" lc 7 lt 7 w lp , \
      "tempo_derivadas.dat" using 3:xticlabels(1) title "Com otimização" lc 6 lt 7 w lp
+unset logscale y
 
 # Matriz jacobiana
 
@@ -100,6 +102,7 @@ set ylabel "tempo [ms]"
 set logscale y
 plot "tempo_matriz.dat" using 2:xticlabels(1) title "Sem otimização" lc 7 lt 7 w lp , \
      "tempo_matriz.dat" using 3:xticlabels(1) title "Com otimização" lc 6 lt 7 w lp
+unset logscale y
 
 # Sistema linear
 
@@ -133,3 +136,4 @@ set ylabel "tempo [ms]"
 set logscale y
 plot "tempo_sistema.dat" using 2:xticlabels(1) title "Sem otimização" lc 7 lt 7 w lp , \
      "tempo_sistema.dat" using 3:xticlabels(1) title "Com otimização" lc 6 lt 7 w lp
+unset logscale y
