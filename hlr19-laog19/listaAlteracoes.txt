@@ -10,3 +10,8 @@
 4 - Uso de restrict pointers
     Permite que o compilador entenda que não há dependências implícitas.
 
+5 - Cálculo do vetor F(X)
+    Inversão inline para evitar operações desnecessárias depois
+
+6 - Valores abaixo da diagonal principal não são colocados em 0
+    Desnecessário para o cálculo em matriz tridiagonal
