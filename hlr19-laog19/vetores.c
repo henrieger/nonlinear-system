@@ -63,7 +63,7 @@ void *** jacobiana(void **f, int n, char **variaveis, double * tempo) {
         for (int j = 0; j < n; j++) {
             jac[i][j] = evaluator_derivative(f[i], variaveis[j]);
             if (jac[i][j] == NULL) {
-                fprintf(stderr, "Houve um erro ao calcular as derivadas parciais. Encerrando o programa");
+                fprintf(stderr, "Houve um erro ao calcular as derivadas parciais. Encerrando o programa.\n");
                 exit(1);
             }
         }
