@@ -6621,9 +6621,9 @@ x298 = -0.665798
 x299 = -0.596035
 x300 = -0.416412
 ###########
-# Tempo Total: 36.518799
-# Tempo Derivadas: 1.322998
-# Tempo Jacobiana: 6.588867
-# Tempo SL: 3.547607
+# Tempo Total: 26.397949
+# Tempo Derivadas: 1.195068
+# Tempo Jacobiana: 4.396973
+# Tempo SL: 3.305420
 ###########
 

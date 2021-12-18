@@ -5521,9 +5521,9 @@ x248 = -0.665798
 x249 = -0.596035
 x250 = -0.416412
 ###########
-# Tempo Total: 26.837891
-# Tempo Derivadas: 1.206055
-# Tempo Jacobiana: 5.745361
-# Tempo SL: 3.341797
+# Tempo Total: 21.040771
+# Tempo Derivadas: 0.993164
+# Tempo Jacobiana: 4.251221
+# Tempo SL: 2.988281
 ###########
 

@@ -22549,9 +22549,9 @@ x1022 = -0.665798
 x1023 = -0.596035
 x1024 = -0.416412
 ###########
-# Tempo Total: 8987.358154
-# Tempo Derivadas: 1148.615967
-# Tempo Jacobiana: 6249.386475
-# Tempo SL: 2487.068848
+# Tempo Total: 7731.904053
+# Tempo Derivadas: 1017.757080
+# Tempo Jacobiana: 5591.001953
+# Tempo SL: 1921.290771
 ###########
 

@@ -13221,9 +13221,9 @@ x598 = -0.665798
 x599 = -0.596035
 x600 = -0.416412
 ###########
-# Tempo Total: 3474.900879
-# Tempo Derivadas: 414.081055
-# Tempo Jacobiana: 3009.727295
-# Tempo SL: 367.470947
+# Tempo Total: 3038.312988
+# Tempo Derivadas: 352.639893
+# Tempo Jacobiana: 2636.415527
+# Tempo SL: 321.174805
 ###########
 

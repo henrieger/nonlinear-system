@@ -22021,9 +22021,9 @@ x998 = -0.665798
 x999 = -0.596035
 x1000 = -0.416412
 ###########
-# Tempo Total: 8900.909912
-# Tempo Derivadas: 1068.010986
-# Tempo Jacobiana: 6120.505371
-# Tempo SL: 2539.243408
+# Tempo Total: 7230.996094
+# Tempo Derivadas: 971.005859
+# Tempo Jacobiana: 5387.410645
+# Tempo SL: 1633.035645
 ###########
 

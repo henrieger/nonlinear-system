@@ -45077,9 +45077,9 @@ x2046 = -0.665798
 x2047 = -0.596035
 x2048 = -0.416412
 ###########
-# Tempo Total: 67464.145020
-# Tempo Derivadas: 4563.398926
-# Tempo Jacobiana: 18036.878174
-# Tempo SL: 48450.658691
+# Tempo Total: 55873.811035
+# Tempo Derivadas: 4086.529053
+# Tempo Jacobiana: 16232.891846
+# Tempo SL: 38759.873535
 ###########
 

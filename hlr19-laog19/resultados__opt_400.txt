@@ -8821,9 +8821,9 @@ x398 = -0.665798
 x399 = -0.596035
 x400 = -0.416412
 ###########
-# Tempo Total: 64.357178
-# Tempo Derivadas: 1.641846
-# Tempo Jacobiana: 8.836182
-# Tempo SL: 3.623291
+# Tempo Total: 41.311035
+# Tempo Derivadas: 1.558105
+# Tempo Jacobiana: 5.118408
+# Tempo SL: 3.314453
 ###########
 

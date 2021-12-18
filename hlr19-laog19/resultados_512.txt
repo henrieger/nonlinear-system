@@ -11285,9 +11285,9 @@ x510 = -0.665798
 x511 = -0.596035
 x512 = -0.416412
 ###########
-# Tempo Total: 2789.635010
-# Tempo Derivadas: 303.225830
-# Tempo Jacobiana: 2469.166260
-# Tempo SL: 242.858887
+# Tempo Total: 2416.503174
+# Tempo Derivadas: 256.412842
+# Tempo Jacobiana: 2147.425293
+# Tempo SL: 207.261475
 ###########
 

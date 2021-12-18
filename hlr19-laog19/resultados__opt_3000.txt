@@ -66021,9 +66021,9 @@ x2998 = -0.665798
 x2999 = -0.596035
 x3000 = -0.416412
 ###########
-# Tempo Total: 2119.291016
-# Tempo Derivadas: 12.451172
-# Tempo Jacobiana: 42.547363
-# Tempo SL: 4.028076
+# Tempo Total: 1899.750977
+# Tempo Derivadas: 11.093018
+# Tempo Jacobiana: 36.747314
+# Tempo SL: 3.598389
 ###########
 

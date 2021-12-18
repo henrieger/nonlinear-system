@@ -90133,9 +90133,9 @@ x4094 = -0.665798
 x4095 = -0.596035
 x4096 = -0.416412
 ###########
-# Tempo Total: 9933954.778076
-# Tempo Derivadas: 27342.234863
-# Tempo Jacobiana: 9507312.854492
-# Tempo SL: 384079.950928
+# Tempo Total: 7176661.682129
+# Tempo Derivadas: 16364.187988
+# Tempo Jacobiana: 6783985.938477
+# Tempo SL: 371105.543457
 ###########
 

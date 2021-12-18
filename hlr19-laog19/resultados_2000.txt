@@ -44021,9 +44021,9 @@ x1998 = -0.665798
 x1999 = -0.596035
 x2000 = -0.416412
 ###########
-# Tempo Total: 67465.822021
-# Tempo Derivadas: 4381.663086
-# Tempo Jacobiana: 17672.104492
-# Tempo SL: 48850.744385
+# Tempo Total: 49251.285156
+# Tempo Derivadas: 3911.027832
+# Tempo Jacobiana: 15557.575684
+# Tempo SL: 32857.369873
 ###########
 

@@ -4421,9 +4421,9 @@ x198 = -0.665798
 x199 = -0.596035
 x200 = -0.416412
 ###########
-# Tempo Total: 806.315918
-# Tempo Derivadas: 50.228027
-# Tempo Jacobiana: 771.117920
-# Tempo SL: 16.596436
+# Tempo Total: 723.866943
+# Tempo Derivadas: 39.994141
+# Tempo Jacobiana: 696.820801
+# Tempo SL: 14.441650
 ###########
 

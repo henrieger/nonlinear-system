@@ -5653,9 +5653,9 @@ x254 = -0.665798
 x255 = -0.596035
 x256 = -0.416412
 ###########
-# Tempo Total: 1094.958984
-# Tempo Derivadas: 75.955811
-# Tempo Jacobiana: 1035.331543
-# Tempo SL: 33.930664
+# Tempo Total: 963.331055
+# Tempo Derivadas: 64.879883
+# Tempo Jacobiana: 916.196777
+# Tempo SL: 28.888672
 ###########
 
