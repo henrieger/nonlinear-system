@@ -2,6 +2,14 @@ Autores:
     Henrique Luiz Rieger - GRR20190357 - hlr19
     Leon Augusto Okida Gonçalves - GRR20190365 - laog19
 
+Como usar o script:
+    Para executar os experimentos, basta compilar o código-fonte com o comando 'make' e executar './script.sh' no diretório principal do trabalho.
+Após isso, deve-se inserir a senha do super-usuário, o que fará com que os experimentos sejam iniciados.
+Por fim, deve-se aguardar o término dos experimentos. Os gráficos e resultados serão gerados automaticamente.
+Não é obrigatório compilar o código-fonte antes, mas a compilação pelo script pode gerar erros.
+***IMPORTANTE: Caso haja erro do LIKWID na execução do script, basta matar o processo e compilar manualmente o código-fonte antes de executar novamente.
+Isso pode ser feito com os comandos 'make clean; make'.
+
 Documentação:
     Funções de linhaComando.h - tratam a linha de comando, definindo arquivo de saída:
         abreArquivo(): Recebe como parâmetros argc e argv, lidos da linha de comando. Detecta se a opção "-o" foi utilizada. Se sim, abre um arquivo com o nome indicado como argumento para escrita; caso contrário, define a saída padrão como arquivo para escrita.
